@@ -7,7 +7,7 @@ var tableauCroix = []
 var tableauRond = []
 var compteur = 0
 for (var i = 0; i < col; i++) {
-    nbCol += "<div class='col-sm-2 case' data-colonne='" + i + "'></div>"
+    nbCol += "<div class='col-sm-2 case col-xs-4 case' data-colonne='" + i + "'></div>"
 }
 
 for (var i = 0; i < ligne; i++) {
