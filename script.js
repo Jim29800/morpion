@@ -3,9 +3,11 @@ var col = 3;
 var ligne = 3;
 var nbLigne = "";
 var nbCol = "";
-var tableauCroix = []
-var tableauRond = []
-var compteur = 0
+var tableauCroix = [];
+var tableauRond = [];
+var compteur = 0;
+var nbVictoireX = 0;
+var nbVictoireO = 0;
 for (var i = 0; i < col; i++) {
     nbCol += "<div class='col-sm-2 case col-xs-4 case' data-colonne='" + i + "'></div>"
 }
@@ -14,6 +16,11 @@ for (var i = 0; i < ligne; i++) {
     nbLigne += "<div class='row' data-ligne='" + i + "'>" + nbCol + "</div>"
 }
 $(".container").html(nbLigne)
+$("#RAZ").click(function () {
+    $(".case").html("")
+    tableauCroix = [];
+    tableauRond = [];
+});
 //case a cliquer
 $(".case").click(function () {
     var choix2 = $(this).data("colonne");
@@ -23,19 +30,26 @@ $(".case").click(function () {
         $(this).text("X")
         compteur++
         tableauCroix.push("" + choix1 + choix2);
+        $("#tour").html("Au tour de 0" )
         //console.log(tableauCroix)
-        if (verifiVictoire(tableauCroix) === true)
-            (alert("Joueur au X : victoire"))
+        if (verifiVictoire(tableauCroix) === true) {
+            setTimeout(function () { alert("Joueur au X : victoire"); }, 100);
+            nbVictoireX++
+            $("#nbVictoireX").html(nbVictoireX)
+        }
     }
     else if ($(this).text() === "" && compteur % 2 === 1) {
         console.log("vide")
         $(this).text("O")
         compteur++
         tableauRond.push("" + choix1 + choix2);
+         $("#tour").html("Au tour de X" )
         //console.log(tableauRond)
-        if (verifiVictoire(tableauRond) === true){
-            (alert("Joueur au O : victoire"))
-    }
+        if (verifiVictoire(tableauRond) === true) {
+            setTimeout(function () { alert("Joueur au O : victoire"); }, 100);
+            nbVictoireO++
+            $("#nbVictoireO").html(nbVictoireO)
+        }
     }
     else {
         console.log("plein")
