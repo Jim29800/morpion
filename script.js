@@ -11,7 +11,17 @@ var nbVictoireO = 0;
 var nbEgalite = 0;
 var nbPartie;
 var partieEffectuer = 0;
-nbPartie = parseInt(prompt("Combien de partie voulez vous faire ?"));
+var joueur1 = "Joueur 1";
+var joueur2 = "Joueur 2";
+
+joueur1 = prompt("Le joueur aux X s'appelle :");
+joueur2 = prompt("Le joueur aux O s'appelle :");
+do {
+    nbPartie = parseInt(prompt("Combien de partie voulez vous faire ? (Merci de saisir un chiffre)"));
+} while (isNaN(nbPartie));
+$("#joueur1").html(joueur1);
+$("#joueur2").html(joueur2);
+$("#nbPartie").html(nbPartie);
 
 for (var i = 0; i < col; i++) {
     nbCol += "<div class='col-sm-2 case col-xs-4 case' data-colonne='" + i + "'></div>"
@@ -39,9 +49,10 @@ $(".case").click(function () {
             $("#tour").html("Au tour de 0");
             //console.log(tableauCroix)
             if (verifiVictoire(tableauCroix) === true) {
-                setTimeout(function () { alert("Joueur au X : victoire"); }, 100);
+                setTimeout(function () { alert("Joueur aux X : victoire"); }, 100);
                 nbVictoireX++;
                 partieEffectuer++;
+                $("#partieEffectuer").html(partieEffectuer)
                 $("#nbVictoireX").html(nbVictoireX);
                 compteur = 0;
                 setTimeout(function () { $(".case").html("") }, 200)
@@ -57,9 +68,10 @@ $(".case").click(function () {
             $("#tour").html("Au tour de X");
             //console.log(tableauRond)
             if (verifiVictoire(tableauRond) === true) {
-                setTimeout(function () { alert("Joueur au O : victoire"); }, 100);
+                setTimeout(function () { alert("Joueur aux O : victoire"); }, 100);
                 nbVictoireO++;
                 partieEffectuer++;
+                $("#partieEffectuer").html(partieEffectuer)
                 $("#nbVictoireO").html(nbVictoireO);
                 compteur = 0;
                 setTimeout(function () { $(".case").html("") }, 200)
@@ -74,6 +86,7 @@ $(".case").click(function () {
     else if (compteur < 9 && partieEffectuer < nbPartie) {
         nbEgalite++;
         partieEffectuer++;
+        $("#partieEffectuer").html(partieEffectuer);
         tableauCroix = [];
         tableauRond = [];
         $("#nbEgalite").html(nbEgalite);
@@ -93,8 +106,11 @@ $(".case").click(function () {
                 $("#nbVictoireX").html(nbVictoireX);
                 $("#nbVictoireO").html(nbVictoireO);
                 $("#nbEgalite").html(nbEgalite);
+                $("#tour").html("Joueur aux X commence.");
                 partieEffectuer = 0;
-                nbPartie = parseInt(prompt("Combien de partie voulez vous faire ?"));
+                do {
+                    nbPartie = parseInt(prompt("Combien de partie voulez vous faire ? (Merci de saisir un chiffre)"));
+                } while (isNaN(nbPartie));
             }
 
         }, 100);
