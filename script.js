@@ -42,9 +42,9 @@ $(".case").click(function () {
     if (compteur < 8 && partieEffectuer < nbPartie) {
         var choix2 = $(this).data("colonne");
         var choix1 = $(this).parent().data("ligne");
-        if ($(this).text() === "" && compteur % 2 === 0) {
+        if ($(this).html() === "" && compteur % 2 === 0) {
             console.log("vide");
-            $(this).text("X");
+            $(this).html("<img src = 'X.png'>");
             compteur++;
             tableauCroix.push("" + choix1 + choix2);
             $("#tour").html("Au tour de 0");
@@ -61,9 +61,9 @@ $(".case").click(function () {
                 tableauRond = [];
             }
         }
-        else if ($(this).text() === "" && compteur % 2 === 1) {
+        else if ($(this).html() === "" && compteur % 2 === 1) {
             console.log("vide");
-            $(this).text("O");
+            $(this).html("<img src = 'O.png'>");
             compteur++;
             tableauRond.push("" + choix1 + choix2);
             $("#tour").html("Au tour de X");
@@ -96,10 +96,10 @@ $(".case").click(function () {
     }
     else if (partieEffectuer == nbPartie) {
         if (nbVictoireX < nbVictoireO) {
-            gagnant = "joueur aux O gagne !";
+            gagnant = "joueur aux O gagne : " + joueur2;
         }
         if (nbVictoireX > nbVictoireO) {
-            gagnant = "joueur aux X gagne !";
+            gagnant = "joueur aux X gagne : "+ joueur1;
         }
         if (nbVictoireX == nbVictoireO){
             gagnant = "égalité !";
