@@ -1,4 +1,3 @@
-//Creation du tableau
 var col = 3;
 var ligne = 3;
 var nbLigne = "";
@@ -14,16 +13,18 @@ var partieEffectuer = 0;
 var joueur1 = "Joueur 1";
 var joueur2 = "Joueur 2";
 var gagnant = "";
-
+//nom des joueurs
 joueur1 = prompt("Le joueur aux X s'appelle :");
 joueur2 = prompt("Le joueur aux O s'appelle :");
+//nombre de parties
 do {
     nbPartie = parseInt(prompt("Combien de partie voulez vous faire ? (Merci de saisir un chiffre)"));
 } while (isNaN(nbPartie));
+//affichage dans le html
 $("#joueur1").html(joueur1);
 $("#joueur2").html(joueur2);
 $("#nbPartie").html(nbPartie);
-
+//Creation du tableau
 for (var i = 0; i < col; i++) {
     nbCol += "<div class='col-sm-2 case col-xs-4 case' data-colonne='" + i + "'></div>"
 }
@@ -32,23 +33,27 @@ for (var i = 0; i < ligne; i++) {
     nbLigne += "<div class='row' data-ligne='" + i + "'>" + nbCol + "</div>"
 }
 $(".container").html(nbLigne)
-$("#RAZ").click(function () {
-    $(".case").html("")
-    tableauCroix = [];
-    tableauRond = [];
-});
+//bouton RAZ
+// $("#RAZ").click(function () {
+//     $(".case").html("")
+//     tableauCroix = [];
+//     tableauRond = [];
+// });
 //case a cliquer
 $(".case").click(function () {
+    //verifi le nombre de case cocher
     if (compteur < 8 && partieEffectuer < nbPartie) {
+        //recupere l'axe X et Y
         var choix2 = $(this).data("colonne");
         var choix1 = $(this).parent().data("ligne");
+        // si le compteur est un nombre paire Joueur X joue et que la partie n'est pas terminer
         if ($(this).html() === "" && compteur % 2 === 0) {
             console.log("vide");
             $(this).html("<img src = 'X.png'>");
             compteur++;
             tableauCroix.push("" + choix1 + choix2);
             $("#tour").html("Au tour de 0");
-            //console.log(tableauCroix)
+            //verifi la victoire de X et RAZ le talbeau
             if (verifiVictoire(tableauCroix) === true) {
                 setTimeout(function () { alert("Joueur aux X : victoire"); }, 100);
                 nbVictoireX++;
@@ -61,13 +66,14 @@ $(".case").click(function () {
                 tableauRond = [];
             }
         }
+        // si le compteur est un nombre paire Joueur O joue et que la partie n'est pas terminer
         else if ($(this).html() === "" && compteur % 2 === 1) {
             console.log("vide");
             $(this).html("<img src = 'O.png'>");
             compteur++;
             tableauRond.push("" + choix1 + choix2);
             $("#tour").html("Au tour de X");
-            //console.log(tableauRond)
+            //verifi la victoire de O et RAZ le talbeau
             if (verifiVictoire(tableauRond) === true) {
                 setTimeout(function () { alert("Joueur aux O : victoire"); }, 100);
                 nbVictoireO++;
@@ -84,6 +90,7 @@ $(".case").click(function () {
             alert("cette case est déjà utilisé")
         }
     }
+    // Verifi que le tableau est rempli et donne une égalité
     else if (compteur < 9 && partieEffectuer < nbPartie) {
         nbEgalite++;
         partieEffectuer++;
@@ -94,6 +101,7 @@ $(".case").click(function () {
         $(".case").html("");
         compteur = 0;
     }
+    // defini le joueur gagnant quand la partie est terminer et RAZ tous
     else if (partieEffectuer == nbPartie) {
         if (nbVictoireX < nbVictoireO) {
             gagnant = "joueur aux O gagne : " + joueur2;
@@ -173,5 +181,3 @@ function verifiVictoire(choixjoueur) {
 //ligne :       00 01 02 / 10 11 12 / 20 21 22
 //colonne :     00 10 20 / 01 11 21 / 02 12 22
 //diagonalle :  00 11 22 / 02 11 20
-
-
