@@ -42,7 +42,7 @@ $(".container").html(nbLigne)
 //case a cliquer
 $(".case").click(function () {
     //verifi le nombre de case cocher
-    if (compteur < 8 && partieEffectuer < nbPartie) {
+    if (compteur <= 8 && partieEffectuer < nbPartie) {
         //recupere l'axe X et Y
         var choix2 = $(this).data("colonne");
         var choix1 = $(this).parent().data("ligne");
@@ -52,7 +52,7 @@ $(".case").click(function () {
             $(this).html("<img src = 'X.png'>");
             compteur++;
             tableauCroix.push("" + choix1 + choix2);
-            $("#tour").html("Au tour de 0");
+            $("#tour").html("Au tour de " + joueur2 + " (O)");
             //verifi la victoire de X et RAZ le talbeau
             if (verifiVictoire(tableauCroix) === true) {
                 setTimeout(function () { alert("Joueur aux X : victoire"); }, 100);
@@ -64,6 +64,19 @@ $(".case").click(function () {
                 setTimeout(function () { $(".case").html("") }, 200)
                 tableauCroix = [];
                 tableauRond = [];
+                $("#tour").html("Au tour de " + joueur1 + " (X)");
+            }
+            // Verifi que le tableau est rempli et donne une égalité
+            else if (compteur === 9 && partieEffectuer < nbPartie) {
+                setTimeout(function () { alert("Egalité"); }, 100);
+                nbEgalite++;
+                partieEffectuer++;
+                $("#partieEffectuer").html(partieEffectuer);
+                tableauCroix = [];
+                tableauRond = [];
+                $("#nbEgalite").html(nbEgalite);
+                $(".case").html("");
+                compteur = 0;
             }
         }
         // si le compteur est un nombre paire Joueur O joue et que la partie n'est pas terminer
@@ -72,7 +85,7 @@ $(".case").click(function () {
             $(this).html("<img src = 'O.png'>");
             compteur++;
             tableauRond.push("" + choix1 + choix2);
-            $("#tour").html("Au tour de X");
+            $("#tour").html("Au tour de X " + joueur1);
             //verifi la victoire de O et RAZ le talbeau
             if (verifiVictoire(tableauRond) === true) {
                 setTimeout(function () { alert("Joueur aux O : victoire"); }, 100);
@@ -85,55 +98,56 @@ $(".case").click(function () {
                 tableauCroix = [];
                 tableauRond = [];
             }
+            else if (compteur === 9 && partieEffectuer < nbPartie) {
+                setTimeout(function () { alert("Egalité"); }, 100);
+                nbEgalite++;
+                partieEffectuer++;
+                $("#partieEffectuer").html(partieEffectuer);
+                tableauCroix = [];
+                tableauRond = [];
+                $("#nbEgalite").html(nbEgalite);
+                $(".case").html("");
+                compteur = 0;
+            }
         }
         else {
             alert("cette case est déjà utilisé")
         }
     }
-    // Verifi que le tableau est rempli et donne une égalité
-    else if (compteur < 9 && partieEffectuer < nbPartie) {
-        nbEgalite++;
-        partieEffectuer++;
-        $("#partieEffectuer").html(partieEffectuer);
-        tableauCroix = [];
-        tableauRond = [];
-        $("#nbEgalite").html(nbEgalite);
-        $(".case").html("");
-        compteur = 0;
-    }
+
     // defini le joueur gagnant quand la partie est terminer et RAZ tous
     else if (partieEffectuer == nbPartie) {
         if (nbVictoireX < nbVictoireO) {
             gagnant = "joueur aux O gagne : " + joueur2;
         }
         if (nbVictoireX > nbVictoireO) {
-            gagnant = "joueur aux X gagne : "+ joueur1;
+            gagnant = "joueur aux X gagne : " + joueur1;
         }
-        if (nbVictoireX == nbVictoireO){
+        if (nbVictoireX == nbVictoireO) {
             gagnant = "égalité !";
         }
-    setTimeout(function () {
-        if (confirm("Partie terminé," + gagnant + ", voulez vous faire une nouvelle partie ?")) {
-            tableauCroix = [];
-            tableauRond = [];
-            nbVictoireO = 0;
-            nbVictoireX = 0;
-            nbEgalite = 0;
-            nbPartie = 0;
-            compteur = 0;
-            partieEffectuer = 0;
-            $("#partieEffectuer").html(partieEffectuer)
-            $("#nbVictoireX").html(nbVictoireX);
-            $("#nbVictoireO").html(nbVictoireO);
-            $("#nbEgalite").html(nbEgalite);
-            $("#tour").html("Joueur aux X commence.");
-            do {
-                nbPartie = parseInt(prompt("Combien de partie voulez vous faire ? (Merci de saisir un chiffre)"));
-            } while (isNaN(nbPartie));
-            $("#nbPartie").html(nbPartie)
-        }
-    }, 100);
-}
+        setTimeout(function () {
+            if (confirm("Partie terminé," + gagnant + ", voulez vous faire une nouvelle partie ?")) {
+                tableauCroix = [];
+                tableauRond = [];
+                nbVictoireO = 0;
+                nbVictoireX = 0;
+                nbEgalite = 0;
+                nbPartie = 0;
+                compteur = 0;
+                partieEffectuer = 0;
+                $("#partieEffectuer").html(partieEffectuer)
+                $("#nbVictoireX").html(nbVictoireX);
+                $("#nbVictoireO").html(nbVictoireO);
+                $("#nbEgalite").html(nbEgalite);
+                $("#tour").html("Joueur aux X commence.");
+                do {
+                    nbPartie = parseInt(prompt("Combien de partie voulez vous faire ? (Merci de saisir un chiffre)"));
+                } while (isNaN(nbPartie));
+                $("#nbPartie").html(nbPartie)
+            }
+        }, 100);
+    }
 })
 //condition de victoire
 function verifiVictoire(choixjoueur) {
