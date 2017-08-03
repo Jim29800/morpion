@@ -13,6 +13,7 @@ var nbPartie;
 var partieEffectuer = 0;
 var joueur1 = "Joueur 1";
 var joueur2 = "Joueur 2";
+var gagnant = "";
 
 joueur1 = prompt("Le joueur aux X s'appelle :");
 joueur2 = prompt("Le joueur aux O s'appelle :");
@@ -94,27 +95,37 @@ $(".case").click(function () {
         compteur = 0;
     }
     else if (partieEffectuer == nbPartie) {
-        setTimeout(function () {
-            if (confirm("Partie terminé, voulez vous faire une nouvelle partie ?")) {
-                tableauCroix = [];
-                tableauRond = [];
-                nbVictoireO = 0;
-                nbVictoireX = 0;
-                nbEgalite = 0;
-                nbPartie = 0;
-                compteur = 0;
-                $("#nbVictoireX").html(nbVictoireX);
-                $("#nbVictoireO").html(nbVictoireO);
-                $("#nbEgalite").html(nbEgalite);
-                $("#tour").html("Joueur aux X commence.");
-                partieEffectuer = 0;
-                do {
-                    nbPartie = parseInt(prompt("Combien de partie voulez vous faire ? (Merci de saisir un chiffre)"));
-                } while (isNaN(nbPartie));
-            }
-
-        }, 100);
-    }
+        if (nbVictoireX < nbVictoireO) {
+            gagnant = "joueur aux O gagne !";
+        }
+        if (nbVictoireX > nbVictoireO) {
+            gagnant = "joueur aux X gagne !";
+        }
+        if (nbVictoireX == nbVictoireO){
+            gagnant = "égalité !";
+        }
+    setTimeout(function () {
+        if (confirm("Partie terminé," + gagnant + ", voulez vous faire une nouvelle partie ?")) {
+            tableauCroix = [];
+            tableauRond = [];
+            nbVictoireO = 0;
+            nbVictoireX = 0;
+            nbEgalite = 0;
+            nbPartie = 0;
+            compteur = 0;
+            partieEffectuer = 0;
+            $("#partieEffectuer").html(partieEffectuer)
+            $("#nbVictoireX").html(nbVictoireX);
+            $("#nbVictoireO").html(nbVictoireO);
+            $("#nbEgalite").html(nbEgalite);
+            $("#tour").html("Joueur aux X commence.");
+            do {
+                nbPartie = parseInt(prompt("Combien de partie voulez vous faire ? (Merci de saisir un chiffre)"));
+            } while (isNaN(nbPartie));
+            $("#nbPartie").html(nbPartie)
+        }
+    }, 100);
+}
 })
 //condition de victoire
 function verifiVictoire(choixjoueur) {
