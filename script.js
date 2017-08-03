@@ -8,6 +8,11 @@ var tableauRond = [];
 var compteur = 0;
 var nbVictoireX = 0;
 var nbVictoireO = 0;
+var nbEgalite = 0;
+var nbPartie;
+var partieEffectuer = 0;
+nbPartie = parseInt(prompt("Combien de partie voulez vous faire ?"));
+
 for (var i = 0; i < col; i++) {
     nbCol += "<div class='col-sm-2 case col-xs-4 case' data-colonne='" + i + "'></div>"
 }
@@ -23,36 +28,76 @@ $("#RAZ").click(function () {
 });
 //case a cliquer
 $(".case").click(function () {
-    var choix2 = $(this).data("colonne");
-    var choix1 = $(this).parent().data("ligne");
-    if ($(this).text() === "" && compteur % 2 === 0) {
-        console.log("vide")
-        $(this).text("X")
-        compteur++
-        tableauCroix.push("" + choix1 + choix2);
-        $("#tour").html("Au tour de 0" )
-        //console.log(tableauCroix)
-        if (verifiVictoire(tableauCroix) === true) {
-            setTimeout(function () { alert("Joueur au X : victoire"); }, 100);
-            nbVictoireX++
-            $("#nbVictoireX").html(nbVictoireX)
+    if (compteur < 8 && partieEffectuer < nbPartie) {
+        var choix2 = $(this).data("colonne");
+        var choix1 = $(this).parent().data("ligne");
+        if ($(this).text() === "" && compteur % 2 === 0) {
+            console.log("vide");
+            $(this).text("X");
+            compteur++;
+            tableauCroix.push("" + choix1 + choix2);
+            $("#tour").html("Au tour de 0");
+            //console.log(tableauCroix)
+            if (verifiVictoire(tableauCroix) === true) {
+                setTimeout(function () { alert("Joueur au X : victoire"); }, 100);
+                nbVictoireX++;
+                partieEffectuer++;
+                $("#nbVictoireX").html(nbVictoireX);
+                compteur = 0;
+                setTimeout(function () { $(".case").html("") }, 200)
+                tableauCroix = [];
+                tableauRond = [];
+            }
+        }
+        else if ($(this).text() === "" && compteur % 2 === 1) {
+            console.log("vide");
+            $(this).text("O");
+            compteur++;
+            tableauRond.push("" + choix1 + choix2);
+            $("#tour").html("Au tour de X");
+            //console.log(tableauRond)
+            if (verifiVictoire(tableauRond) === true) {
+                setTimeout(function () { alert("Joueur au O : victoire"); }, 100);
+                nbVictoireO++;
+                partieEffectuer++;
+                $("#nbVictoireO").html(nbVictoireO);
+                compteur = 0;
+                setTimeout(function () { $(".case").html("") }, 200)
+                tableauCroix = [];
+                tableauRond = [];
+            }
+        }
+        else {
+            alert("cette case est déjà utilisé")
         }
     }
-    else if ($(this).text() === "" && compteur % 2 === 1) {
-        console.log("vide")
-        $(this).text("O")
-        compteur++
-        tableauRond.push("" + choix1 + choix2);
-         $("#tour").html("Au tour de X" )
-        //console.log(tableauRond)
-        if (verifiVictoire(tableauRond) === true) {
-            setTimeout(function () { alert("Joueur au O : victoire"); }, 100);
-            nbVictoireO++
-            $("#nbVictoireO").html(nbVictoireO)
-        }
+    else if (compteur < 9 && partieEffectuer < nbPartie) {
+        nbEgalite++;
+        partieEffectuer++;
+        tableauCroix = [];
+        tableauRond = [];
+        $("#nbEgalite").html(nbEgalite);
+        $(".case").html("");
+        compteur = 0;
     }
-    else {
-        console.log("plein")
+    else if (partieEffectuer == nbPartie) {
+        setTimeout(function () {
+            if (confirm("Partie terminé, voulez vous faire une nouvelle partie ?")) {
+                tableauCroix = [];
+                tableauRond = [];
+                nbVictoireO = 0;
+                nbVictoireX = 0;
+                nbEgalite = 0;
+                nbPartie = 0;
+                compteur = 0;
+                $("#nbVictoireX").html(nbVictoireX);
+                $("#nbVictoireO").html(nbVictoireO);
+                $("#nbEgalite").html(nbEgalite);
+                partieEffectuer = 0;
+                nbPartie = parseInt(prompt("Combien de partie voulez vous faire ?"));
+            }
+
+        }, 100);
     }
 })
 //condition de victoire
