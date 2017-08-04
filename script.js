@@ -13,8 +13,6 @@ var partieEffectuer = 0;
 var joueur1 = "Joueur 1";
 var joueur2 = "Joueur 2";
 var gagnant = "";
-
-
 // affiche le modal
 $('#myModal').modal('toggle')
 //nom des joueurs
@@ -27,7 +25,6 @@ $("#valider").click(function () {
     $("#joueur1").html(joueur1);
     $("#joueur2").html(joueur2);
     $("#nbPartie").html(nbPartie);
-
 })
 //Creation du tableau
 for (var i = 0; i < col; i++) {
@@ -46,7 +43,6 @@ $(".case").click(function () {
         var choix1 = $(this).parent().data("ligne");
         // si le compteur est un nombre paire Joueur X joue et que la partie n'est pas terminer
         if ($(this).html() === "" && compteur % 2 === 0) {
-            // console.log("vide");
             $(this).html("<img src = 'X.png'>");
             compteur++;
             tableauCroix.push("" + choix1 + choix2);
@@ -82,7 +78,6 @@ $(".case").click(function () {
         }
         // si le compteur est un nombre paire Joueur O joue et que la partie n'est pas terminer
         else if ($(this).html() === "" && compteur % 2 === 1) {
-            // console.log("vide");
             $(this).html("<img src = 'O.png'>");
             compteur++;
             tableauRond.push("" + choix1 + choix2);
@@ -119,8 +114,9 @@ $(".case").click(function () {
             $('#modalVictoire').modal('toggle');
         }
     }
+    //verifi si la partie et terminé
     if (partieEffectuer === nbPartie) {
-         if (nbVictoireX === nbVictoireO) {
+        if (nbVictoireX === nbVictoireO) {
             gagnant = "égalité !";
         }
         if (nbVictoireX < nbVictoireO) {
@@ -129,8 +125,8 @@ $(".case").click(function () {
         if (nbVictoireX > nbVictoireO) {
             gagnant = "Le gagnant de la partie est : " + joueur1 + " (X)";
         }
-            //affiche le modal gagnant
-            $('#modalVictoire').modal('hide');
+        //affiche le modal gagnant
+        $('#modalVictoire').modal('hide');
         $("#textVictoireFinale").html("Partie terminé !<br />" + gagnant + "<br />Voulez vous faire une nouvelle partie ?");
         $('#modalVictoireFinal').modal('toggle');
     }
@@ -153,7 +149,6 @@ function verifiVictoire(choixjoueur) {
     for (var i = 0; i < choixjoueur.length; i++) {
         if (choixjoueur[i] == "00" || choixjoueur[i] == "01" || choixjoueur[i] == "02") {
             l0++
-            console.log(l0)
         }
         if (choixjoueur[i] == "10" || choixjoueur[i] == "11" || choixjoueur[i] == "12") {
             l1++
