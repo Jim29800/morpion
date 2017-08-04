@@ -1,15 +1,13 @@
-[class*="col-"] {
-	border: 1px solid;
-    height:160px;
-    width: 160px;
+.case{
+    background-color: lightsteelblue; 
     text-align: center;
-    /* border-radius: 1em; */
-    background-color: lightsteelblue;
-    font-size: 100px;
+    border: 1px solid;
+    height: 12em;
 }
+
 img{
-    width: 100px;
-    height: 100px;
+    width: 70%;
+    height: 70%;
 }
 .mini{
     width: 20px;

@@ -28,12 +28,12 @@ $("#valider").click(function () {
 })
 //Creation du tableau
 for (var i = 0; i < col; i++) {
-    nbCol += "<div class='col-sm-2 case col-xs-4 case' data-colonne='" + i + "'></div>"
+    nbCol += "<div class='col-sm-4 case col-xs-4 case' data-colonne='" + i + "'></div>"
 }
 for (var i = 0; i < ligne; i++) {
     nbLigne += "<div class='row' data-ligne='" + i + "'>" + nbCol + "</div>"
 }
-$(".container").html(nbLigne)
+$("#tableau").html(nbLigne)
 //case a cliquer
 $(".case").click(function () {
     //verifi le nombre de case cocher

@@ -47,24 +47,21 @@
         </div>
     </div>
     <div>
-        <!-- <button id="RAZ">Remise A Zero</button> -->
         <h1 id="tour">Le joueur X commence</h1>
         <p>Joueur aux <img src='X.png' class="mini">(X) : <span id="joueur1"></span></p>
         <p>Joueur aux <img src='O.png' class="mini">(O) : <span id="joueur2"></span></p>
     </div>
     <div class="container">
+    
 
-    </div>
-    <div>
-        <h3>Nombre de <img src='X.png' class="mini"> gagnant : <span id="nbVictoireX">0</span> Nombre d'égalité :
-            <span id="nbEgalite">0</span> Nombre de
-            <img src='O.png' class="mini"> gagnant : <span id="nbVictoireO">0</span> Nombre de partie : <span id="partieEffectuer">0</span>/
-            <span id="nbPartie">1</span>
-        </h3>
-
-    </div>
-
-
+        <div class="row">
+            <div id="tableau" class="col-sm-6 col-xs-12"></div>
+            <div class="col-sm-6 col-xs-12"><h3>Nombre de <img src='X.png' class="mini"> gagnant : <span id="nbVictoireX">0</span></h3></div>
+            <div class="col-sm-6 col-xs-12"><h3> Nombre d'égalité : <span id="nbEgalite">0</span> </div>
+            <div class="col-sm-6 col-xs-12"><h3> Nombre de <img src='O.png' class="mini"> gagnant : <span id="nbVictoireO">0</span></h3></div>
+            <div class="col-sm-6 col-xs-12"><h3> Nombre de partie : <span id="partieEffectuer">0</span>/<span id="nbPartie">1</span></h3></div>
+        </div>
+        </div>
     <!-- Modal -->
     <div id="modalVictoire" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -85,7 +82,7 @@
 
         </div>
     </div>
-     <!-- Modal -->
+    <!-- Modal -->
     <div id="modalVictoireFinal" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
@@ -99,7 +96,7 @@
                     <p id="textVictoireFinale"></p>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" id="nvllePartie">Nouvelle Partie</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="nvllePartie">Nouvelle Partie</button>
                 </div>
             </div>
 
