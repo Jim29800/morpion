@@ -8,11 +8,12 @@ var compteur = 0;
 var nbVictoireX = 0;
 var nbVictoireO = 0;
 var nbEgalite = 0;
-var nbPartie = 0;
+var nbPartie = 1;
 var partieEffectuer = 0;
 var joueur1 = "Joueur 1";
 var joueur2 = "Joueur 2";
 var gagnant = "";
+
 
 // affiche le modal
 $('#myModal').modal('toggle')
@@ -21,7 +22,7 @@ $('#myModal').modal('toggle')
 $("#valider").click(function () {
     joueur1 = $("#joueurX").val();
     joueur2 = $("#joueurO").val();
-    nbPartie = Math.max(isNaN(parseInt($("#Partie").val())) ? 1: parseInt($("#Partie").val()),1);
+    nbPartie = Math.max(isNaN(parseInt($("#Partie").val())) ? 1 : parseInt($("#Partie").val()), 1);
     //affichage dans le html
     $("#joueur1").html(joueur1);
     $("#joueur2").html(joueur2);
@@ -52,7 +53,9 @@ $(".case").click(function () {
             $("#tour").html("Au tour de " + joueur2 + " (O)");
             //verifi la victoire de X et RAZ le talbeau
             if (verifiVictoire(tableauCroix) === true) {
-                setTimeout(function () { alert("Joueur aux X : victoire"); }, 100);
+                //afiche la victoire
+                $("#textVictoire").html(joueur1 + " : victoire");
+                $('#modalVictoire').modal('toggle');
                 nbVictoireX++;
                 partieEffectuer++;
                 $("#partieEffectuer").html(partieEffectuer)
@@ -65,7 +68,8 @@ $(".case").click(function () {
             }
             // Verifi que le tableau est rempli et donne une égalité
             else if (compteur === 9 && partieEffectuer < nbPartie) {
-                setTimeout(function () { alert("Egalité"); }, 100);
+                $("#textVictoire").html("Egalité !");
+                $('#modalVictoire').modal('toggle');
                 nbEgalite++;
                 partieEffectuer++;
                 $("#partieEffectuer").html(partieEffectuer);
@@ -82,10 +86,12 @@ $(".case").click(function () {
             $(this).html("<img src = 'O.png'>");
             compteur++;
             tableauRond.push("" + choix1 + choix2);
-            $("#tour").html("Au tour de X " + joueur1);
+            $("#tour").html("Au tour de " + joueur1 + " (X)");
             //verifi la victoire de O et RAZ le talbeau
             if (verifiVictoire(tableauRond) === true) {
-                setTimeout(function () { alert("Joueur aux O : victoire"); }, 100);
+                //afiche la victoire
+                $("#textVictoire").html(joueur2 + " : victoire");
+                $('#modalVictoire').modal('toggle');
                 nbVictoireO++;
                 partieEffectuer++;
                 $("#partieEffectuer").html(partieEffectuer)
@@ -96,7 +102,8 @@ $(".case").click(function () {
                 tableauRond = [];
             }
             else if (compteur === 9 && partieEffectuer < nbPartie) {
-                setTimeout(function () { alert("Egalité"); }, 100);
+                $("#textVictoire").html("Egalité !");
+                $('#modalVictoire').modal('toggle');
                 nbEgalite++;
                 partieEffectuer++;
                 $("#partieEffectuer").html(partieEffectuer);
@@ -108,41 +115,46 @@ $(".case").click(function () {
             }
         }
         else {
-            alert("cette case est déjà utilisé")
+            $("#textVictoire").html("cette case est déjà utilisé !");
+            $('#modalVictoire').modal('toggle');
         }
     }
-
-    // defini le joueur gagnant quand la partie est terminer et RAZ tous
-    else if (partieEffectuer == nbPartie) {
-        if (nbVictoireX < nbVictoireO) {
-            gagnant = "joueur aux O gagne : " + joueur2;
-        }
-        if (nbVictoireX > nbVictoireO) {
-            gagnant = "joueur aux X gagne : " + joueur1;
-        }
-        if (nbVictoireX == nbVictoireO) {
+})
+$("#close").click(function () {
+    //verifi fin de partie
+    if (partieEffectuer === nbPartie) {
+        //defini le gagnant
+        if (nbVictoireX === nbVictoireO) {
             gagnant = "égalité !";
         }
-        setTimeout(function () {
-            if (confirm("Partie terminé," + gagnant + ", voulez vous faire une nouvelle partie ?")) {
-                tableauCroix = [];
-                tableauRond = [];
-                nbVictoireO = 0;
-                nbVictoireX = 0;
-                nbEgalite = 0;
-                nbPartie = 0;
-                compteur = 0;
-                partieEffectuer = 0;
-                $("#partieEffectuer").html(partieEffectuer)
-                $("#nbVictoireX").html(nbVictoireX);
-                $("#nbVictoireO").html(nbVictoireO);
-                $("#nbEgalite").html(nbEgalite);
-                $("#tour").html("Joueur aux X commence.");
-                $('#myModal').modal('toggle')
-                $("#nbPartie").html(nbPartie)
-            }
-        }, 100);
+        if (nbVictoireX < nbVictoireO) {
+            gagnant = "Le gagnant de la partie est : " + joueur2 + " (O)";
+        }
+        if (nbVictoireX > nbVictoireO) {
+            gagnant = "Le gagnant de la partie est : "  + joueur1 + " (X)";
+        }
+        //affiche le modal gagnant
+        $("#textVictoireFinale").html("Partie terminé !<br />" + gagnant + "<br />Voulez vous faire une nouvelle partie ?");
+        $('#modalVictoireFinal').modal('toggle');
     }
+})
+//RAZ pour nouvelle partie
+$("#nvllePartie").click(function () {
+    tableauCroix = [];
+    tableauRond = [];
+    nbVictoireO = 0;
+    nbVictoireX = 0;
+    nbEgalite = 0;
+    nbPartie = 1;
+    compteur = 0;
+    partieEffectuer = 0;
+    $("#partieEffectuer").html(partieEffectuer)
+    $("#nbVictoireX").html(nbVictoireX);
+    $("#nbVictoireO").html(nbVictoireO);
+    $("#nbEgalite").html(nbEgalite);
+    $("#tour").html("Joueur aux X commence.");
+    $('#myModal').modal('toggle')
+    $("#nbPartie").html(nbPartie)
 })
 //condition de victoire
 function verifiVictoire(choixjoueur) {

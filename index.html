@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Morpion</title>
     <!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -21,7 +21,6 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Parametre de la partie</h4>
                 </div>
                 <div class="modal-body">
@@ -60,12 +59,55 @@
         <h3>Nombre de <img src='X.png' class="mini"> gagnant : <span id="nbVictoireX">0</span> Nombre d'égalité :
             <span id="nbEgalite">0</span> Nombre de
             <img src='O.png' class="mini"> gagnant : <span id="nbVictoireO">0</span> Nombre de partie : <span id="partieEffectuer">0</span>/
-            <span id="nbPartie">0</span>
+            <span id="nbPartie">1</span>
         </h3>
 
     </div>
+
+
+    <!-- Modal -->
+    <div id="modalVictoire" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Information sur la partie</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="textVictoire"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+     <!-- Modal -->
+    <div id="modalVictoireFinal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Fin de partie</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="textVictoireFinale"></p>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="nvllePartie">Nouvelle Partie</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <!-- <script src="node_modules/jquery/dist/jquery.js"></script> -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <!-- <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
