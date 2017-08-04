@@ -21,7 +21,7 @@ $('#myModal').modal('toggle')
 $("#valider").click(function () {
     joueur1 = $("#joueurX").val();
     joueur2 = $("#joueurO").val();
-    nbPartie = Math.max((isNaN(parseInt($("#Partie").val()) ? 1: parseInt($("#Partie").val()))),1);
+    nbPartie = Math.max(isNaN(parseInt($("#Partie").val())) ? 1: parseInt($("#Partie").val()),1);
     //affichage dans le html
     $("#joueur1").html(joueur1);
     $("#joueur2").html(joueur2);
