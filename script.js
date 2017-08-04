@@ -8,37 +8,34 @@ var compteur = 0;
 var nbVictoireX = 0;
 var nbVictoireO = 0;
 var nbEgalite = 0;
-var nbPartie;
+var nbPartie = 0;
 var partieEffectuer = 0;
 var joueur1 = "Joueur 1";
 var joueur2 = "Joueur 2";
 var gagnant = "";
+
+// affiche le modal
+$('#myModal').modal('toggle')
 //nom des joueurs
-joueur1 = prompt("Le joueur aux X s'appelle :");
-joueur2 = prompt("Le joueur aux O s'appelle :");
 //nombre de parties
-do {
-    nbPartie = parseInt(prompt("Combien de partie voulez vous faire ? (Merci de saisir un chiffre)"));
-} while (isNaN(nbPartie));
-//affichage dans le html
-$("#joueur1").html(joueur1);
-$("#joueur2").html(joueur2);
-$("#nbPartie").html(nbPartie);
+$("#valider").click(function () {
+    joueur1 = $("#joueurX").val();
+    joueur2 = $("#joueurO").val();
+    nbPartie = parseInt($("#Partie").val());
+    //affichage dans le html
+    $("#joueur1").html(joueur1);
+    $("#joueur2").html(joueur2);
+    $("#nbPartie").html(nbPartie);
+
+})
 //Creation du tableau
 for (var i = 0; i < col; i++) {
     nbCol += "<div class='col-sm-2 case col-xs-4 case' data-colonne='" + i + "'></div>"
 }
-
 for (var i = 0; i < ligne; i++) {
     nbLigne += "<div class='row' data-ligne='" + i + "'>" + nbCol + "</div>"
 }
 $(".container").html(nbLigne)
-//bouton RAZ
-// $("#RAZ").click(function () {
-//     $(".case").html("")
-//     tableauCroix = [];
-//     tableauRond = [];
-// });
 //case a cliquer
 $(".case").click(function () {
     //verifi le nombre de case cocher
@@ -48,7 +45,7 @@ $(".case").click(function () {
         var choix1 = $(this).parent().data("ligne");
         // si le compteur est un nombre paire Joueur X joue et que la partie n'est pas terminer
         if ($(this).html() === "" && compteur % 2 === 0) {
-            console.log("vide");
+            // console.log("vide");
             $(this).html("<img src = 'X.png'>");
             compteur++;
             tableauCroix.push("" + choix1 + choix2);
@@ -81,7 +78,7 @@ $(".case").click(function () {
         }
         // si le compteur est un nombre paire Joueur O joue et que la partie n'est pas terminer
         else if ($(this).html() === "" && compteur % 2 === 1) {
-            console.log("vide");
+            // console.log("vide");
             $(this).html("<img src = 'O.png'>");
             compteur++;
             tableauRond.push("" + choix1 + choix2);
@@ -141,9 +138,7 @@ $(".case").click(function () {
                 $("#nbVictoireO").html(nbVictoireO);
                 $("#nbEgalite").html(nbEgalite);
                 $("#tour").html("Joueur aux X commence.");
-                do {
-                    nbPartie = parseInt(prompt("Combien de partie voulez vous faire ? (Merci de saisir un chiffre)"));
-                } while (isNaN(nbPartie));
+                $('#myModal').modal('toggle')
                 $("#nbPartie").html(nbPartie)
             }
         }, 100);

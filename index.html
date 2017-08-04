@@ -7,30 +7,69 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Morpion</title>
     <!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <!-- Trigger the modal with a button -->
+    <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Parametre de la partie</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="joueur1">joueur1:</label>
+                            <input type="text" class="form-control" id="joueurX">
+                        </div>
+                        <div class="form-group">
+                            <label for="joueur2">joueur2:</label>
+                            <input type="text" class="form-control" id="joueurO">
+                        </div>
+                        <div class="form-group">
+                            <label for="number">Nombre de parties:</label>
+                            <input type="number" class="form-control" id="Partie">
+                        </div>
+                        <!-- <button type="submit" class="btn btn-default">Valider</button> -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="valider">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div>
         <!-- <button id="RAZ">Remise A Zero</button> -->
         <h1 id="tour">Le joueur X commence</h1>
-        <p>Joueur aux <img src = 'X.png' class="mini">(X) : <span id="joueur1"></span></p>
-        <p>Joueur aux <img src = 'O.png' class="mini">(O) : <span id="joueur2"></span></p>
+        <p>Joueur aux <img src='X.png' class="mini">(X) : <span id="joueur1"></span></p>
+        <p>Joueur aux <img src='O.png' class="mini">(O) : <span id="joueur2"></span></p>
     </div>
     <div class="container">
 
     </div>
     <div>
-        <h3>Nombre de <img src = 'X.png' class="mini"> gagnant : <span id="nbVictoireX">0</span> Nombre d'égalité : 
+        <h3>Nombre de <img src='X.png' class="mini"> gagnant : <span id="nbVictoireX">0</span> Nombre d'égalité :
             <span id="nbEgalite">0</span> Nombre de
-            <img src = 'O.png' class="mini"> gagnant : <span id="nbVictoireO">0</span> 
-            Nombre de partie : <span id="partieEffectuer">0</span>/<span id="nbPartie">0</span></h3>
+            <img src='O.png' class="mini"> gagnant : <span id="nbVictoireO">0</span> Nombre de partie : <span id="partieEffectuer">0</span>/
+            <span id="nbPartie">0</span>
+        </h3>
 
     </div>
     <!-- <script src="node_modules/jquery/dist/jquery.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+    <!-- <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
+
 </body>
 
 </html>
