@@ -119,42 +119,26 @@ $(".case").click(function () {
             $('#modalVictoire').modal('toggle');
         }
     }
-})
-$("#close").click(function () {
-    //verifi fin de partie
     if (partieEffectuer === nbPartie) {
-        //defini le gagnant
-        if (nbVictoireX === nbVictoireO) {
+         if (nbVictoireX === nbVictoireO) {
             gagnant = "égalité !";
         }
         if (nbVictoireX < nbVictoireO) {
             gagnant = "Le gagnant de la partie est : " + joueur2 + " (O)";
         }
         if (nbVictoireX > nbVictoireO) {
-            gagnant = "Le gagnant de la partie est : "  + joueur1 + " (X)";
+            gagnant = "Le gagnant de la partie est : " + joueur1 + " (X)";
         }
-        //affiche le modal gagnant
+            //affiche le modal gagnant
+            $('#modalVictoire').modal('hide');
         $("#textVictoireFinale").html("Partie terminé !<br />" + gagnant + "<br />Voulez vous faire une nouvelle partie ?");
         $('#modalVictoireFinal').modal('toggle');
     }
 })
 //RAZ pour nouvelle partie
 $("#nvllePartie").click(function () {
-    tableauCroix = [];
-    tableauRond = [];
-    nbVictoireO = 0;
-    nbVictoireX = 0;
-    nbEgalite = 0;
-    nbPartie = 1;
-    compteur = 0;
-    partieEffectuer = 0;
-    $("#partieEffectuer").html(partieEffectuer)
-    $("#nbVictoireX").html(nbVictoireX);
-    $("#nbVictoireO").html(nbVictoireO);
-    $("#nbEgalite").html(nbEgalite);
-    $("#tour").html("Joueur aux X commence.");
-    $('#myModal').modal('toggle')
-    $("#nbPartie").html(nbPartie)
+    raz();
+    $('#myModal').modal('toggle');
 })
 //condition de victoire
 function verifiVictoire(choixjoueur) {
@@ -197,7 +181,22 @@ function verifiVictoire(choixjoueur) {
         return true
     }
 }
-
+function raz() {
+    tableauCroix = [];
+    tableauRond = [];
+    nbVictoireO = 0;
+    nbVictoireX = 0;
+    nbEgalite = 0;
+    nbPartie = 1;
+    compteur = 0;
+    partieEffectuer = 0;
+    $("#partieEffectuer").html(partieEffectuer)
+    $("#nbVictoireX").html(nbVictoireX);
+    $("#nbVictoireO").html(nbVictoireO);
+    $("#nbEgalite").html(nbEgalite);
+    $("#tour").html("Joueur aux X commence.");
+    $("#nbPartie").html(nbPartie)
+}
 // ligne/colonne gagnante :
 //ligne :       00 01 02 / 10 11 12 / 20 21 22
 //colonne :     00 10 20 / 01 11 21 / 02 12 22
